@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 12:35:10 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 12:56:56 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/03 14:01:50 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/03 14:01:52 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-**  Program works as follows(not including handeling errors):
-**  - Read arguments.
-**  - Open directory.
-**  - Collect all entries.
+**  Program works as follows(not including handling errors):
+**  - Read arguments and sort .
+**  - For each received directory execute ft_ls.
+**  - Collect all entries in the directory.
 **  - If -a specified, include ".*" directories.
-**  - Sort either by time (if -t specified) or lexicographically.
+**  - Sort entries either by time (if -t specified) or lexicographically.
 **  - If -e specified, format each entry.
 **  - If -r specified, reverse entries.
 **  - Print formatted entries of this directory.
@@ -27,7 +27,10 @@
 **  -
 */
 
-void	ft_ls(t_directory *directory)
+int	main(int argc, char **argv)
 {
-	(void)directory;
+	t_options	options;
+
+	read_arguments(argc, argv, &options);
+
 }

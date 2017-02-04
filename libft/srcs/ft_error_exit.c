@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   ft_error_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 12:07:42 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 12:39:02 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/03 15:11:15 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/03 15:14:19 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#include <libft.h>
 
-# include "libft.h"
-# include "standard_libraries.h"
-# include "t_file.h"
-# include "ft_ls_functions.h"
-
-
-#endif
+void	ft_error_exit(char const *error)
+{
+	ft_error(error);
+	exit(EXIT_FAILURE);
+}

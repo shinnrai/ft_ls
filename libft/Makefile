@@ -6,7 +6,7 @@
 #    By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 12:56:49 by ofedorov          #+#    #+#              #
-#    Updated: 2017/02/03 11:56:27 by ofedorov         ###   ########.fr        #
+#    Updated: 2017/02/03 17:50:01 by ofedorov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCSFL	+=	ft_lstaddend.c ft_lstprint.c ft_lstfindfirst.c ft_lstfindlast.c \
 SRCSFL	+=	get_next_line.c
 SRCSFL	+=	ft_power.c ft_putwchar_fd.c ft_putwchar.c ft_putwstr.c \
 			ft_putwstr_fd.c ft_putnwstr.c ft_putnwstr_fd.c ft_putnstr.c \
-			ft_putnstr_fd.c ft_wcharlen.c ft_wstrlen.c ft_error.c
+			ft_putnstr_fd.c ft_wcharlen.c ft_wstrlen.c ft_error.c \
+			ft_error_exit.c ft_strqsort.c ft_strswap.c
 
 #ft_printf files
 

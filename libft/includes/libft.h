@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:03:12 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 12:12:55 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/03 15:14:40 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,9 +147,15 @@ size_t			ft_wstrlen(wchar_t const *str);
 **	Errors
 */
 void			ft_error(char const *str);
+void			ft_error_exit(char const *str);
 /*
 **	Console output
 */
 void			ft_textcolor(int attr, int fg, int bg);
+/*
+**  Other
+*/
+void			ft_strswap(char **str1, char **str2);
+void			ft_strqsort(char *strings[], int size);
 
 #endif
