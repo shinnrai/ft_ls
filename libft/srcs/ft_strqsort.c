@@ -21,21 +21,20 @@ static void	rec_sort(char *strings[], int begin, int end)
 	if (begin >= end)
 		return ;
 	pivot = strings[begin];
-	left = begin + 1;
+	left = begin;
 	right = end;
 	while (left < right)
 	{
-		if (ft_strcmp(strings[left], pivot) <= 0)
+		while (left < end && ft_strcmp(strings[left], pivot) <= 0)
 			left++;
-		else if (ft_strcmp(strings[right], pivot) > 0)
+		while (ft_strcmp(strings[right], pivot) > 0)
 			right--;
-		else if (left < right)
+		if (left < right)
 			ft_strswap(&strings[left], &strings[right]);
 	}
-	left--;
-	ft_strswap(&strings[begin], &strings[left]);
-	rec_sort(strings, begin, left);
-	rec_sort(strings, right, end);
+	ft_strswap(&strings[begin], &strings[right]);
+	rec_sort(strings, begin, left - 1);
+	rec_sort(strings, right + 1, end);
 }
 
 void	ft_strqsort(char *strings[], int size)
