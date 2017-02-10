@@ -186,6 +186,7 @@ int 			ft_filecmpname(t_file *file1, t_file *file2);
 int				ft_filecmptime(t_file *file1, t_file *file2);
 void			ft_filegetinfo(t_file *file);
 void			ft_filelst_getinfo(t_list *files);
+char			*ft_filegetlongfmt(t_file *file);
 
 
 #endif

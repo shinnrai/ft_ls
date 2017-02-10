@@ -35,7 +35,7 @@ SRCSFL 	=	ft_memset.c ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c \
 			ft_filenew.c ft_lstdelfile.c ft_filelst_qsort.c \
 			ft_filelst_toarr.c ft_filearr_tolst.c ft_lstnotdelcontent.c \
 			ft_lstdelfile.c ft_filecmpname.c ft_filecmptime.c ft_filegetinfo.c \
-			ft_filelst_getinfo.c ft_lstreverse.c
+			ft_filelst_getinfo.c ft_lstreverse.c ft_filegetlongfmt.c
 
 #ft_printf files
 

@@ -26,4 +26,5 @@ void	ft_lstdelfile(void *file, size_t content_size)
 			closedir(file_to_delete->directory_stream);
 		ft_lstdel(&file_to_delete->files_inside, ft_lstdelfile); // maybe shouldn't do it? TODO check what to delete in ft_ls and where
 	}
+	file_to_delete->formatted_info ? free(file_to_delete->formatted_info) : (0);
 }
