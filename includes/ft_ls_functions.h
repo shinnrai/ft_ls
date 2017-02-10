@@ -13,7 +13,12 @@
 #ifndef FT_LS_FUNCTIONS_H
 # define FT_LS_FUNCTIONS_H
 
-t_list		*read_arguments(int argc, char **argv, t_options *options);
 t_options	read_options(int argc, char **argv);
+t_list		*read_files_from_arguments(int argc, char **argv);
+void		ft_ls(t_list *files, t_options options);
+void		exclude_dot_files(t_list *files);
+void		assign_formatted_string(t_list *files_lst, t_options options);
+void		sort_files(t_list **files, t_options options);
+void		display_files(t_list *files_lst);
 
 #endif

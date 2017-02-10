@@ -14,15 +14,25 @@
 
 /*
 **  Program works as follows(not including handling errors):
-**  - Read arguments and sort .
-**  - For each received directory execute ft_ls.
-**  - Collect all entries in the directory.
-**  - If -a specified, include ".*" directories.
-**  - Sort entries either by time (if -t specified) or lexicographically.
-**  - If -e specified, format each entry.
-**  - If -r specified, reverse entries.
-**  - Print formatted entries of this directory.
-**  - If -R specified, call the ft_ls function again on each directory.
+**  - Read options and arguments.
+**  - Sort read files.
+**  - If there is only one file that isn't a directory, display that file.
+**  - If there is one file that is a directory, display its name and pass
+**    entries to ft_ls.
+**  - If there are many files, pass all to ft_ls.
+**  - ft_ls:
+**       1. If -a not specified and file isn't specified in the
+**          command line, exclude ".*" files.
+**       2. Gather info about each file.
+**       3. Format each file according to options.
+**       4. Sort files either by time (if -t specified) or
+**          lexicographically by name.
+**       5. If -r specified, reverse files.
+**       6. Print formatted files of the list. If file is a directory and
+**          is specified in the command line, don't display it.
+**       7. If -R specified or it is directory specified in the command line:
+**             ~ For each directory collect entries.
+**             ~ For each directory execute ft_ls with collected entries.
 **  -
 **  -
 */
@@ -30,7 +40,9 @@
 int	main(int argc, char **argv)
 {
 	t_options	options;
+	t_list		*files;
 
-	read_arguments(argc, argv, &options);
-
+	options = read_options(argc, argv);
+	files = read_files_from_arguments(argc, argv);
+	ft_ls(files, options);
 }

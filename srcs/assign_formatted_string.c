@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls_options.h                                    :+:      :+:    :+:   */
+/*   assign_formatted_string.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 18:19:44 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 18:19:54 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/09 22:16:55 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/09 22:17:04 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_ARGUMENTS_H
-# define FT_LS_ARGUMENTS_H
+#include "ft_ls.h"
 
-typedef uint8_t t_options;
+void	assign_formatted_string(t_list *files_lst, t_options options)
+{
+	t_file	*file;
 
-# define OPTION_L_SMALL		1
-# define OPTION_R_CAPITAL	2
-# define OPTION_R_SMALL		4
-# define OPTION_A_SMALL		8
-# define OPTION_T_SMALL		16
-
-#endif
+	while (files_lst)
+	{
+		file = (t_file*)files_lst->content;
+		if (options & OPTION_L_SMALL)
+			file->formatted_info = ft_filegetlongfmt(file);
+		else
+			file->formatted_info = ft_strdup(file->name);
+		files_lst = files_lst->next;
+	}
+}

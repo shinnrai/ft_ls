@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   standard_libraries.h                               :+:      :+:    :+:   */
+/*   sort_files.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 12:18:56 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 12:23:15 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/09 22:40:32 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/09 22:40:33 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STANDARD_LIBRARIES_H
-# define STANDARD_LIBRARIES_H
+#include "ft_ls.h"
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdbool.h>
-# include <string.h>
-# include <dirent.h>
-# include <sys/stat.h>
-# include <sys/types.h>
-# include <sys/xattr.h>
-# include <pwd.h>
-# include <uuid/uuid.h>
-# include <grp.h>
-# include <time.h>
-
-#endif
+void	sort_files(t_list **files, t_options options)
+{
+	if (options & OPTION_T_SMALL)
+		ft_filelst_qsort(files, ft_filecmptime);
+	else
+		ft_filelst_qsort(files, ft_filecmpname);
+}

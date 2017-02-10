@@ -1,42 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_arguments.c                                   :+:      :+:    :+:   */
+/*   read_files_from_arguments.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 13:49:16 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 13:49:23 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/09 12:24:32 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/09 12:24:34 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-**  This function reads arguments from command line, reads and writes options
-**  into variable options, receives, sorts and returns entered files.
+**  This function receives and returns entered files from command line.
 */
 
-t_list	*read_arguments(int argc, char **argv, t_options *options)
+t_list	*read_files_from_arguments(int argc, char **argv)
 {
 	t_list		*received_files;
 	int 		index;
+	t_file		*file_to_add;
+	t_list		*node_to_add;
 
 
 
 
 	received_files = NULL;
-	*options = read_options(argc, argv);
 	index = 1;
 	while (index < argc && argv[index][0] == '-')
 		index++;
-	ft_strqsort(&argv[index], argc - index);
-	while (index < argc)
+	if (argc == index)
 	{
-		ft_lstadd(&received_files, ft_lstnew(argv[index], sizeof(char *)));
-		index++;
+		file_to_add = ft_filenew(".", NULL);
+		node_to_add = ft_lstnew(file_to_add, sizeof(t_file));
+		ft_lstadd(&received_files, node_to_add);
 	}
-	//should do array of files?
-/// left here
+	else
+		while (index < argc)
+		{
+			file_to_add = ft_filenew(argv[index], NULL);
+			node_to_add = ft_lstnew(file_to_add, sizeof(t_file));
+			ft_lstadd(&received_files, node_to_add);
+			index++;
+		}
 	return (received_files);
 }
