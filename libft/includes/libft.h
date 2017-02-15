@@ -23,6 +23,7 @@
 # include <sys/types.h>
 # include <sys/xattr.h>
 # include <pwd.h>
+# include <limits.h>
 # include <uuid/uuid.h>
 # include <grp.h>
 # include <time.h>
@@ -48,6 +49,8 @@
 # define WHITE		7
 
 # define NOCOLOR	RESET, WHITE, BLACK
+
+# define FREE_IFN_NULL(to_free) (to_free) ? free(to_free) : (0);
 
 /*
 **	Part I
@@ -179,14 +182,15 @@ void			ft_strqsort(char *strings[], int size);
 # include "t_file.h"
 
 t_file			*ft_filenew(char *name, char *path);
-void			ft_filelst_qsort(t_list **lst, int (*file_compare)(t_file*, t_file*));
+void			ft_filelst_qsort(t_list **lst,
+				int (*file_compare)(t_file*, t_file*));
 t_file			**ft_filelst_toarr(t_list *lst, int *size);
 t_list			*ft_filearr_tolst(t_file **array, int size);
 int 			ft_filecmpname(t_file *file1, t_file *file2);
 int				ft_filecmptime(t_file *file1, t_file *file2);
-void			ft_filegetinfo(t_file *file);
-void			ft_filelst_getinfo(t_list *files);
-char			*ft_filegetlongfmt(t_file *file);
-
+void			ft_file_getinfo(t_file *file, char *add_to_error);
+void			ft_filelst_getinfo(t_list *files, char *add_to_error);
+char			*ft_file_getlongfmt(t_file *file);
+t_list			*ft_file_getentries(t_file *directory, char *add_to_error);
 
 #endif

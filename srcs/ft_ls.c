@@ -20,12 +20,12 @@ void	ft_ls(t_list *files, t_options options)
 {
 	t_list	*entries;
 
-	if (!(options & OPTION_A_SMALL))
+	if (!(options & OPTION_INCLUDE_DOT_FILES))
 		exclude_dot_files(files);
 	//ft_filelst_getinfo(files);
 	assign_formatted_string(files, options);
 	sort_files(&files, options);
-	if (options & OPTION_R_SMALL)
+	if (options & OPTION_REVERSE)
 		ft_lstreverse(&files);
 	display_files(files);
 

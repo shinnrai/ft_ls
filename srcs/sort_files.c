@@ -14,7 +14,7 @@
 
 void	sort_files(t_list **files, t_options options)
 {
-	if (options & OPTION_T_SMALL)
+	if (options & OPTION_TIME_SORT)
 		ft_filelst_qsort(files, ft_filecmptime);
 	else
 		ft_filelst_qsort(files, ft_filecmpname);

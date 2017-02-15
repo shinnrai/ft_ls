@@ -6,7 +6,7 @@
 #    By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/03 11:58:52 by ofedorov          #+#    #+#              #
-#    Updated: 2017/02/03 12:14:09 by ofedorov         ###   ########.fr        #
+#    Updated: 2017/02/11 19:09:44 by ofedorov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	ft_ls
 
 CC			=	gcc
 CFLAGS		+=	-Wall -Werror -Wextra
-RM			=	rm
+RM			=	/bin/rm
 RMFLAGS		+=	-rf
 
 SRCSFL		=	test.c

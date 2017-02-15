@@ -20,15 +20,15 @@
 static t_options	determine_option(char option)
 {
 	if (option == 'l')
-		return (OPTION_L_SMALL);
+		return (OPTION_LONG_FORMAT);
 	else if (option == 'R')
-		return (OPTION_R_CAPITAL);
+		return (OPTION_RECURSIVE);
 	else if (option == 'r')
-		return (OPTION_R_SMALL);
+		return (OPTION_REVERSE);
 	if (option == 'a')
-		return (OPTION_A_SMALL);
+		return (OPTION_INCLUDE_DOT_FILES);
 	else if (option == 't')
-		return (OPTION_T_SMALL);
+		return (OPTION_TIME_SORT);
 	else
 	{
 		ft_error("ft_ls: illegal option -- ");

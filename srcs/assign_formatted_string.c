@@ -19,8 +19,8 @@ void	assign_formatted_string(t_list *files_lst, t_options options)
 	while (files_lst)
 	{
 		file = (t_file*)files_lst->content;
-		if (options & OPTION_L_SMALL)
-			file->formatted_info = ft_filegetlongfmt(file);
+		if (options & OPTION_LONG_FORMAT)
+			file->formatted_info = ft_file_getlongfmt(file);
 		else
 			file->formatted_info = ft_strdup(file->name);
 		files_lst = files_lst->next;

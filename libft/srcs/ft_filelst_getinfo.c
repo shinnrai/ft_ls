@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-void	ft_filelst_getinfo(t_list *files)
+void	ft_filelst_getinfo(t_list *files, char *add_to_error)
 {
 	t_list	*node;
 
 	node = files;
 	while (node)
 	{
-		ft_filegetinfo((t_file*)node->content);
+		ft_file_getinfo((t_file*)node->content, add_to_error);
 		node = node->next;
 	}
 }

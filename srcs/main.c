@@ -42,6 +42,8 @@ int	main(int argc, char **argv)
 	t_options	options;
 	t_list		*files;
 
+//	printf("%s\n\n", s);
+
 	options = read_options(argc, argv);
 	files = read_files_from_arguments(argc, argv);
 	ft_ls(files, options);

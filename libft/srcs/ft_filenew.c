@@ -15,16 +15,21 @@
 t_file	*ft_filenew(char *name, char *path)
 {
 	t_file	*new_file;
+	char	*path_with_slash;
 
 	new_file = (t_file*)malloc(sizeof(t_file));
 	new_file->name = ft_strdup(name);
 	new_file->path = ft_strdup(path);
+	if (path)
+		path_with_slash = ft_strjoin(path, "/");
+	else
+		path_with_slash = NULL;
+	new_file->full_name = ft_strjoin(path_with_slash, name);
+	FREE_IFN_NULL(path_with_slash);
+
 	new_file->formatted_info = NULL;
 
-	new_file->is_directory = false;
-	new_file->time_of_modification = NULL;
+	new_file->time_of_modification = 0;
 
-	new_file->directory_stream = NULL;
-	new_file->files_inside = NULL;
 	return (new_file);
 }

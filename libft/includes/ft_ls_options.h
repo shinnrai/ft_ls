@@ -15,11 +15,11 @@
 
 typedef uint8_t t_options;
 
-# define OPTION_L_SMALL			1
-# define OPTION_R_CAPITAL		2
-# define OPTION_R_SMALL			4
-# define OPTION_A_SMALL			8
-# define OPTION_T_SMALL			16
-# define OPTION_SEVERAL_FILES	32
+# define OPTION_LONG_FORMAT			1
+# define OPTION_RECURSIVE			2
+# define OPTION_REVERSE				4
+# define OPTION_INCLUDE_DOT_FILES	8
+# define OPTION_TIME_SORT			16
+# define OPTION_SEVERAL_FILES		32
 
 #endif
