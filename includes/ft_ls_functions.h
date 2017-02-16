@@ -15,10 +15,8 @@
 
 t_options	read_options(int argc, char **argv);
 t_list		*read_files_from_arguments(int argc, char **argv);
-void		ft_ls(t_list *files, t_options options);
-void		exclude_dot_files(t_list *files);
-void		assign_formatted_string(t_list *files_lst, t_options options);
-void		sort_files(t_list **files, t_options options);
-void		display_files(t_list *files_lst);
+void		ft_ls(t_list *file_list, t_options options);
+int			is_dot_file(void *content, size_t content_size);
+int			is_dir_from_command_line(void *content, size_t content_size);
 
 #endif

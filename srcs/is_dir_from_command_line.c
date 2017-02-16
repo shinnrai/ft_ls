@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_files.c                                       :+:      :+:    :+:   */
+/*   is_dir_from_command_line.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 22:40:32 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/09 22:40:33 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/15 23:01:00 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/15 23:01:03 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	sort_files(t_list **files, t_options options)
+int	is_dir_from_command_line(void *content, size_t content_size)
 {
-	if (options & OPTION_TIME_SORT)
-		ft_filelst_qsort(files, ft_filecmptime);
-	else
-		ft_filelst_qsort(files, ft_filecmpname);
+	t_file	*file;
+
+	(void)content_size;
+	file = (t_file*)content;
+	if (FT_ISDIR(file->mode) && !file->path)
+		return (1);
+	return (0);
 }

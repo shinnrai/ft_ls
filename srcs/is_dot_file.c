@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   assign_formatted_string.c                          :+:      :+:    :+:   */
+/*   is_dot_file.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 22:16:55 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/09 22:17:04 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/15 23:00:11 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/15 23:00:13 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	assign_formatted_string(t_list *files_lst, t_options options)
+int	is_dot_file(void *content, size_t content_size)
 {
 	t_file	*file;
 
-	while (files_lst)
-	{
-		file = (t_file*)files_lst->content;
-		if (options & OPTION_LONG_FORMAT)
-			file->formatted_info = ft_file_getlongfmt(file);
-		else
-			file->formatted_info = ft_strdup(file->name);
-		files_lst = files_lst->next;
-	}
+	(void)content_size;
+	file = (t_file*)content;
+	if (file->name[0] == '.')
+		return (1);
+	return (0);
 }

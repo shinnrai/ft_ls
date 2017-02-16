@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   display_files.c                                    :+:      :+:    :+:   */
+/*   ft_filelst_print.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 22:44:52 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/09 22:44:53 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/15 22:12:08 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/15 22:12:09 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-void	display_files(t_list *files_lst)
+void	ft_filelst_print(t_list *file_list)
 {
+	t_list	*node;
 	t_file	*file;
 
-	while (files_lst)
+	node = file_list;
+	while (node)
 	{
-		file = (t_file*)files_lst->content;
-		ft_putendl(file->formatted_info);
-		files_lst = files_lst->next;
+		file = (t_file*)node->content;
+		ft_putendl(file->name);
+		node = node->next;
 	}
 }

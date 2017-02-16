@@ -23,9 +23,6 @@ t_list	*read_files_from_arguments(int argc, char **argv)
 	t_file		*file_to_add;
 	t_list		*node_to_add;
 
-
-
-
 	received_files = NULL;
 	index = 1;
 	while (index < argc && argv[index][0] == '-')

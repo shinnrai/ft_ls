@@ -21,20 +21,23 @@
 **    entries to ft_ls.
 **  - If there are many files, pass all to ft_ls.
 **  - ft_ls:
-**       1. If -a not specified and file isn't specified in the
+**       1. Sort files lexicographically by name.
+**       2. Get info about each file.
+**       3. If -a not specified and file isn't specified in the
 **          command line, exclude ".*" files.
-**       2. Gather info about each file.
-**       3. Format each file according to options.
-**       4. Sort files either by time (if -t specified) or
-**          lexicographically by name.
-**       5. If -r specified, reverse files.
-**       6. Print formatted files of the list. If file is a directory and
-**          is specified in the command line, don't display it.
-**       7. If -R specified or it is directory specified in the command line:
+**       2. If -t specified, sort by time.
+**       3. If -r specified, reverse files.
+**       4. Print files of the list:
+**             ~ If file is a directory and is specified in the command line,
+**               exclude it from print file list.
+**             ~ If -l is specified, print files in long format.
+**               Otherwise, print files.
+**       5. If -R specified or it is directory specified in the command line:
+**             ~ For each directory display its name.
 **             ~ For each directory collect entries.
 **             ~ For each directory execute ft_ls with collected entries.
-**  -
-**  -
+**  ----------------------------------------------------------------------------
+**  * specified in the command line = path equal NULL
 */
 
 int	main(int argc, char **argv)
