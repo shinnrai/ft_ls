@@ -32,7 +32,8 @@
 **               exclude it from print file list.
 **             ~ If -l is specified, print files in long format.
 **               Otherwise, print files.
-**       5. If -R specified or it is directory specified in the command line:
+**       5. If -R specified or it is directory specified in the command line,
+**          display entries of the directories:
 **             ~ For each directory display its name.
 **             ~ For each directory collect entries.
 **             ~ For each directory execute ft_ls with collected entries.
@@ -43,11 +44,25 @@
 int	main(int argc, char **argv)
 {
 	t_options	options;
-	t_list		*files;
+	t_file		*file;
+	t_list		*file_list;
 
 //	printf("%s\n\n", s);
 
 	options = read_options(argc, argv);
-	files = read_files_from_arguments(argc, argv);
-	ft_ls(files, options);
+	file_list = read_files_from_arguments(argc, argv);
+	ft_filelst_qsort(&file_list, ft_filecmpname);
+	if (!file_list->next)
+	{
+		file = (t_file*)file_list->content;
+		ft_file_getinfo(file, "ft_ls: ");
+		if (FT_ISDIR(file->mode))
+			display_entries_one_dir(file, options);
+		else if (options & OPTION_LONG_FORMAT)
+			ft_filelst_printlongformat(file_list);
+		else
+			ft_filelst_print(file_list);
+	}
+	else
+		ft_ls(file_list, options);
 }
