@@ -27,6 +27,21 @@ typedef struct	s_size_of_fields
 	uint8_t		file_size;
 }				t_size_of_fields;
 
+static quad_t	get_total_blocks(t_list *file_list)
+{
+	quad_t	total_blocks;
+	t_file	*file;
+
+	total_blocks = 0;
+	while (file_list)
+	{
+		file = (t_file*)file_list->content;
+		total_blocks += file->blocks;
+		file_list = file_list->next;
+	}
+	return (total_blocks);
+}
+
 static void	determine_fields_size(t_list *file_list,
 								t_size_of_fields *size_of_fields)
 {
@@ -124,12 +139,15 @@ void		ft_filelst_printlongformat(t_list *file_list)
 	t_size_of_fields	size_of_fields;
 	t_list				*node;
 	t_file				*file;
+	quad_t				total_blocks;
 
 	if (!file_list)
 		return ;
 	size_of_fields = (t_size_of_fields){0, 0, 0, 0};
 	determine_fields_size(file_list, &size_of_fields);
 	node = file_list;
+	total_blocks = get_total_blocks(file_list);
+	ft_printf("%lld total\n", total_blocks);
 	while (node)
 	{
 		file = (t_file*)node->content;

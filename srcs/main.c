@@ -16,9 +16,8 @@
 **  Program works as follows(not including handling errors):
 **  - Read options and arguments.
 **  - Sort read files.
+**  - If there is one file that is a directory, pass its entries to ft_ls.
 **  - If there is only one file that isn't a directory, display that file.
-**  - If there is one file that is a directory, display its name and pass
-**    entries to ft_ls.
 **  - If there are many files, pass all to ft_ls.
 **  - ft_ls:
 **       1. Sort files lexicographically by name.

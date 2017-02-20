@@ -12,39 +12,17 @@
 
 #include "ft_ls.h"
 
-static quad_t	get_total_blocks(t_list *file_list)
-{
-	quad_t	total_blocks;
-	t_file	*file;
-
-	total_blocks = 0;
-	while (file_list)
-	{
-		file = (t_file*)file_list->content;
-		total_blocks += file->blocks;
-		file_list = file_list->next;
-	}
-	return (total_blocks);
-}
-
 void			display_entries_one_dir(t_file *directory, t_options options)
 {
-	quad_t	total_blocks;
 	t_list	*entries;
 	
 	entries = ft_file_getentries(directory, "ft_ls: ");
 	if (entries)
-	{
-		if (options & OPTION_LONG_FORMAT)
-		{
-			total_blocks = get_total_blocks(entries);
-			ft_printf("%lld total\n", total_blocks);
-		}
 		ft_ls(entries, options);
-	}
 }
 
-void			display_entries(t_list *file_list, t_options options)
+void			display_entries(t_list *file_list, t_options options,
+								bool new_line)
 {
 	t_file	*directory;
 	t_list	*node;
@@ -55,8 +33,15 @@ void			display_entries(t_list *file_list, t_options options)
 	while (node)
 	{
 		directory = (t_file*)node->content;
-		display_entries_one_dir(directory, options);
+		if (ft_strcmp(directory->name, ".") &&
+			ft_strcmp(directory->name, ".."))
+		{
+			(new_line) ? ft_printf("\n") : (0);
+			ft_printf("%s:\n", directory->full_name);
+			display_entries_one_dir(directory, options);
+		}
+		new_line = true;
 		node = node->next;
 	}
-	ft_lstdel(&directory_list, ft_lstdelfile);
+	//ft_lstdel(&directory_list, ft_lstdelfile);
 }

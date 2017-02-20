@@ -33,7 +33,7 @@ static t_options	determine_option(char option)
 	{
 		ft_error("ft_ls: illegal option -- ");
 		ft_error("");
-		ft_error_exit("\nusage: ft_ls [-Ralrt] [file ...]");
+		ft_error_exit("\nusage: ft_ls [-Ralrt] [file ...]\n");
 	}
 	return (0);
 }
