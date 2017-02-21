@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls_options.h                                    :+:      :+:    :+:   */
+/*   t_list.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/03 18:19:44 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 18:19:54 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/21 14:54:19 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/21 14:55:35 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_ARGUMENTS_H
-# define FT_LS_ARGUMENTS_H
+#ifndef T_LIST_H
+# define T_LIST_H
 
-typedef uint8_t t_options;
-
-# define OPTION_LONG_FORMAT			1
-# define OPTION_RECURSIVE			2
-# define OPTION_REVERSE				4
-# define OPTION_INCLUDE_DOT_FILES	8
-# define OPTION_TIME_SORT			16
-# define OPTION_SEVERAL_FILES		32
+typedef struct		s_list
+{
+	void			*content;
+	size_t			content_size;
+	struct s_list	*next;
+}					t_list;
 
 #endif

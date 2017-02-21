@@ -6,7 +6,7 @@
 #    By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/02/03 11:58:52 by ofedorov          #+#    #+#              #
-#    Updated: 2017/02/11 19:09:44 by ofedorov         ###   ########.fr        #
+#    Updated: 2017/02/21 13:49:58 by ofedorov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,13 @@ CFLAGS		+=	-Wall -Werror -Wextra
 RM			=	/bin/rm
 RMFLAGS		+=	-rf
 
-SRCSFL		=	test.c
+SRCSFL		=	main.c \
+				display_entries.c \
+				ft_ls.c \
+				is_dot_file.c \
+				isnot_dir_from_command_line.c \
+				read_files_from_arguments.c \
+				read_options.c
 
 SRCSFD		=	srcs
 OBJSFD		=	objs
@@ -55,9 +61,11 @@ clean:
 	@$(RM) $(RMFLAGS) $(OBJS)
 	@echo "$(RED)Objects deleted$(NC)"
 	@$(RM) $(RMFLAGS) $(OBJSFD)
+	@make -C libft clean
 
 fclean: clean
 	@$(RM) $(RMFLAGS) $(NAME)
 	@echo "$(RED)Program deleted.$(NC)"
+	@make -C libft fclean
 
 re: fclean all

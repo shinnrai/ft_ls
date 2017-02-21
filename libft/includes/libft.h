@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:03:12 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 15:14:40 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:07:34 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # include <time.h>
 # include "get_next_line.h"
 # include "libftprintf.h"
-# include "ft_ls_options.h"
+# include "t_list.h"
+# include "t_file.h"
 
 # define RESET		0
 # define BRIGHT 	1
@@ -115,13 +116,6 @@ void			ft_putnbr_fd(long long n, int fd);
 /*
 **	Bonus part
 */
-typedef struct	s_list
-{
-	void			*content;
-	size_t			content_size;
-	struct s_list	*next;
-}				t_list;
-
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
@@ -149,8 +143,8 @@ t_list			*ft_lstcpy(t_list *list, void *(*copy_content)(void*, size_t));
 void			ft_lstdelif(t_list **list, int (*needs_to_del)(void *, size_t),
 				void (*del)(void *, size_t));
 int				ft_lstif_file_isdir(void *content, size_t content_size);
-t_list			*ft_lstcpyif(t_list *list, int (*needs_to_copy)(void*,size_t),
-					   void *(*copy_content)(void*, size_t));
+t_list			*ft_lstcpyif(t_list *list, int (*needs_to_copy)(void*, size_t),
+				void *(*copy_content)(void*, size_t));
 void			*ft_lstcpycontent_memcpy(void *content, size_t content_size);
 void			*ft_lstcpycontent_file(void *content, size_t content_size);
 /*
@@ -187,9 +181,6 @@ void			ft_strqsort(char *strings[], int size);
 /*
 **  Files
 */
-
-# include "t_file.h"
-
 t_file			*ft_filenew(char *name, char *path);
 void			ft_filedel(t_file *file_to_delete);
 t_file			*ft_filecpy(t_file *file);
@@ -197,7 +188,7 @@ void			ft_filelst_qsort(t_list **lst,
 				int (*file_compare)(t_file*, t_file*));
 t_file			**ft_filelst_toarr(t_list *lst, int *size);
 t_list			*ft_filearr_tolst(t_file **array, int size);
-int 			ft_filecmpname(t_file *file1, t_file *file2);
+int				ft_filecmpname(t_file *file1, t_file *file2);
 int				ft_filecmptime(t_file *file1, t_file *file2);
 int				ft_file_getinfo(t_file *file, char *add_to_error);
 void			ft_filelst_getinfo(t_list **file_list, char *add_to_error);

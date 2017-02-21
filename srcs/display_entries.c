@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/17 22:46:18 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/17 22:46:20 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:06:50 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void			display_entries_one_dir(t_file *directory, t_options options)
 {
 	t_list	*entries;
-	
+
 	entries = ft_file_getentries(directory, "ft_ls: ");
 	if (entries)
 		ft_ls(entries, options);

@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 12:07:42 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 12:39:02 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:05:42 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 
 # include "libft.h"
 # include "standard_libraries.h"
-# include "t_file.h"
+# include "ft_ls_options.h"
 # include "ft_ls_functions.h"
 
-# define IS_FROM_COMMAND_LINE(flst) (((t_file*)flst->content)->path ? 0 : 1)
-
+# define IS_FROM_COMMAND_LINE(fl) (fl && ((t_file*)fl->content)->path ? 0 : 1)
 
 #endif

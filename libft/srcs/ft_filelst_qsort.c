@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/06 11:20:14 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/06 11:20:15 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:09:04 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	rec_sort(t_file *files[], int begin, int end,
 	rec_sort(files, right + 1, end, file_compare);
 }
 
-void	ft_filelst_qsort(t_list **lst, int (*file_compare)(t_file*, t_file*))
+void		ft_filelst_qsort(t_list **lst,
+							int (*file_compare)(t_file*, t_file*))
 {
 	int		size;
 	t_file	**array_of_files;
@@ -59,6 +60,5 @@ void	ft_filelst_qsort(t_list **lst, int (*file_compare)(t_file*, t_file*))
 	rec_sort(array_of_files, 0, size - 1, file_compare);
 	sorted_list = ft_filearr_tolst(array_of_files, size);
 	ft_lstdel(lst, ft_lstnotdelcontent);
-	//here check if segfault?
 	*lst = sorted_list;
 }

@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/14 19:55:40 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/14 19:55:49 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:00:16 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static void	set_link_name(t_file *file, struct stat *file_stat)
 
 static void	copy_stat(t_file *file, struct stat *file_stat)
 {
-	struct passwd *user_info;
-	struct group *group_info;
+	struct passwd	*user_info;
+	struct group	*group_info;
 
 	file->blocks = file_stat->st_blocks;
 	file->file_size = file_stat->st_size;
@@ -50,6 +50,7 @@ static void	copy_stat(t_file *file, struct stat *file_stat)
 	else
 		file->group_name = ft_itoa(file->group_id);
 	file->time_of_modification = file_stat->st_mtimespec.tv_sec;
+	file->time_of_modification_nsec = file_stat->st_mtimespec.tv_nsec;
 	file->mode = file_stat->st_mode;
 	if (FT_ISLNK(file->mode))
 		set_link_name(file, file_stat);
@@ -57,10 +58,10 @@ static void	copy_stat(t_file *file, struct stat *file_stat)
 		file->linking_to = NULL;
 }
 
-int		ft_file_getinfo(t_file *file, char *add_to_error)
+int			ft_file_getinfo(t_file *file, char *add_to_error)
 {
 	struct stat	file_stat;
-	int 		return_from_stat;
+	int			return_from_stat;
 	char		*info_for_error;
 
 	return_from_stat = lstat(file->full_name, &file_stat);
@@ -74,4 +75,3 @@ int		ft_file_getinfo(t_file *file, char *add_to_error)
 	copy_stat(file, &file_stat);
 	return (0);
 }
-

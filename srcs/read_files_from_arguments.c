@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 12:24:32 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/09 12:24:34 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:06:08 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 t_list	*read_files_from_arguments(int argc, char **argv)
 {
 	t_list		*received_files;
-	int 		index;
+	int			index;
 	t_file		*file_to_add;
 	t_list		*node_to_add;
 

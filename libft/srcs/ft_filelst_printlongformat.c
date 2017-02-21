@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 22:10:00 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/15 22:10:02 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 15:08:35 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static quad_t	get_total_blocks(t_list *file_list)
 	return (total_blocks);
 }
 
-static void	determine_fields_size(t_list *file_list,
+static void		determine_fields_size(t_list *file_list,
 								t_size_of_fields *size_of_fields)
 {
 	t_file	*file;
@@ -81,8 +81,7 @@ static void	determine_fields_size(t_list *file_list,
 **  total: 31 + nlinks + user name + group name + size + file name + link name
 */
 
-
-static void	print_filemode(mode_t mode)
+static void		print_filemode(mode_t mode)
 {
 	if (FT_ISBLK(mode))
 		ft_putchar('b');
@@ -109,13 +108,13 @@ static void	print_filemode(mode_t mode)
 	ft_putchar((mode & S_IXOTH) ? 'x' : '-');
 }
 
-static void	print_one_longformat(t_file *file, t_size_of_fields *size_of_fields) //TODO check for block/special files and @
+static void		print_one_longformat(t_file *file,
+									t_size_of_fields *size_of_fields)
 {
 	char	*time_string;
 
 	print_filemode(file->mode);
-
-	ft_printf("  %*d %*s  %*s  %*d",
+	ft_printf("  %*d %*s  %*s  %*llu",
 				size_of_fields->hard_links, file->hard_links,
 				size_of_fields->user_name, file->user_name,
 				size_of_fields->group_name, file->group_name,
@@ -125,7 +124,7 @@ static void	print_one_longformat(t_file *file, t_size_of_fields *size_of_fields)
 	if (time(NULL) - file->time_of_modification < SIX_MONTH)
 		ft_putnstr(&time_string[11], 5);
 	else
-		ft_putnstr(&time_string[18], 5);
+		ft_putnstr(&time_string[19], 5);
 	ft_printf(" %s", file->name);
 	if (FT_ISLNK(file->mode))
 	{
@@ -134,7 +133,7 @@ static void	print_one_longformat(t_file *file, t_size_of_fields *size_of_fields)
 	}
 }
 
-void		ft_filelst_printlongformat(t_list *file_list)
+void			ft_filelst_printlongformat(t_list *file_list)
 {
 	t_size_of_fields	size_of_fields;
 	t_list				*node;

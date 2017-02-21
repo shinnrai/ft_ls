@@ -14,9 +14,15 @@
 
 int	ft_filecmptime(t_file *file1, t_file *file2)
 {
-	if (file1->time_of_modification > file2->time_of_modification)
-		return (1);
 	if (file1->time_of_modification < file2->time_of_modification)
+		return (1);
+	if (file1->time_of_modification > file2->time_of_modification)
+		return (-1);
+	if (file1->time_of_modification_nsec <
+		file2->time_of_modification_nsec)
+		return (1);
+	if (file1->time_of_modification_nsec >
+		file2->time_of_modification_nsec)
 		return (-1);
 	return (0);
 }

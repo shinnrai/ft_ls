@@ -46,8 +46,6 @@ int	main(int argc, char **argv)
 	t_file		*file;
 	t_list		*file_list;
 
-//	printf("%s\n\n", s);
-
 	options = read_options(argc, argv);
 	file_list = read_files_from_arguments(argc, argv);
 	ft_filelst_qsort(&file_list, ft_filecmpname);
