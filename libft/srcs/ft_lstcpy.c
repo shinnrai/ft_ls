@@ -12,15 +12,18 @@
 
 #include "libft.h"
 
-t_list	*ft_lstcpy(t_list *list)
+t_list	*ft_lstcpy(t_list *list, void *(*copy_content)(void*, size_t))
 {
 	t_list	*copy_list;
 	t_list	*new_node;
+	void	*content;
 
 	copy_list = NULL;
 	while (list)
 	{
-		new_node = ft_lstnew(list->content, list->content_size);
+		content = copy_content(list->content, list->content_size);
+		new_node = ft_lstnew(content, list->content_size);
+		free(content);
 		ft_lstaddend(&copy_list, new_node);
 		list = list->next;
 	}

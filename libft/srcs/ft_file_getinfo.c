@@ -31,13 +31,24 @@ static void	set_link_name(t_file *file, struct stat *file_stat)
 
 static void	copy_stat(t_file *file, struct stat *file_stat)
 {
+	struct passwd *user_info;
+	struct group *group_info;
+
 	file->blocks = file_stat->st_blocks;
 	file->file_size = file_stat->st_size;
 	file->hard_links = file_stat->st_nlink;
 	file->user_id = file_stat->st_uid;
 	file->group_id = file_stat->st_gid;
-	file->user_name = ft_strdup(getpwuid(file->user_id)->pw_name);
-	file->group_name = ft_strdup(getgrgid(file->group_id)->gr_name);
+	user_info = getpwuid(file->user_id);
+	if (user_info)
+		file->user_name = ft_strdup(user_info->pw_name);
+	else
+		file->user_name = ft_itoa(file->user_id);
+	group_info = getgrgid(file->group_id);
+	if (group_info)
+		file->group_name = ft_strdup(group_info->gr_name);
+	else
+		file->group_name = ft_itoa(file->group_id);
 	file->time_of_modification = file_stat->st_mtimespec.tv_sec;
 	file->mode = file_stat->st_mode;
 	if (FT_ISLNK(file->mode))

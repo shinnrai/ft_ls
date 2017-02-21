@@ -61,6 +61,7 @@ int	main(int argc, char **argv)
 			ft_filelst_printlongformat(file_list);
 		else
 			ft_filelst_print(file_list);
+		ft_lstdel(&file_list, ft_lstdelfile);
 	}
 	else
 		ft_ls(file_list, options);

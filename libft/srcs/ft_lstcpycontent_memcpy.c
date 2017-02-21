@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_lstcpycontent_memcpy.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 11:48:08 by ofedorov          #+#    #+#             */
-/*   Updated: 2016/09/28 11:54:09 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/20 17:02:13 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/20 17:02:14 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	*ft_lstcpycontent_memcpy(void *content, size_t content_size)
 {
-	t_list	*node_to_del;
+	void	*copy_content;
 
-	if (!alst || !(*alst))
-		return ;
-	while (*alst)
-	{
-		node_to_del = *alst;
-		*alst = (*alst)->next;
-		ft_lstdelone(&node_to_del, del);
-	}
-	*alst = NULL;
+	if (!content)
+		return (NULL);
+	copy_content = malloc(content_size);
+	copy_content = ft_memcpy(copy_content, content, content_size);
+	return (copy_content);
 }

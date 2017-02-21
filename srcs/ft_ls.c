@@ -19,23 +19,28 @@
 void			ft_ls(t_list *file_list, t_options options)
 {
 	t_list	*print_file_list;
+	bool	new_line_in_the_start;
 
 	if (!file_list)
 		return ;
 	ft_filelst_qsort(&file_list, ft_filecmpname);
 	ft_filelst_getinfo(&file_list, "ft_ls: ");
-	if (!(options & OPTION_INCLUDE_DOT_FILES))
+	if (!(options & OPTION_INCLUDE_DOT_FILES) &&
+		!IS_FROM_COMMAND_LINE(file_list))
 		ft_lstdelif(&file_list, is_dot_file, ft_lstdelfile);
 	if (options & OPTION_TIME_SORT)
 		ft_filelst_qsort(&file_list, ft_filecmptime);
 	if (options & OPTION_REVERSE)
 		ft_lstreverse(&file_list);
-	print_file_list = ft_lstcpyif(file_list, isnot_dir_from_command_line);
+	print_file_list = ft_lstcpyif(file_list, isnot_dir_from_command_line,
+									ft_lstcpycontent_file);
 	if (options & OPTION_LONG_FORMAT)
 		ft_filelst_printlongformat(print_file_list);
 	else
 		ft_filelst_print(print_file_list);
+	new_line_in_the_start = print_file_list != NULL;
+	ft_lstdel(&print_file_list, ft_lstdelfile);
 	if (options & OPTION_RECURSIVE || IS_FROM_COMMAND_LINE(file_list))
-		display_entries(file_list, options, print_file_list != NULL);
-	//ft_lstdel(&print_file_list, ft_lstdelfile);
+		display_entries(file_list, options, new_line_in_the_start);
+	ft_lstdel(&file_list, ft_lstdelfile);
 }

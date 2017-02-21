@@ -147,7 +147,7 @@ void		ft_filelst_printlongformat(t_list *file_list)
 	determine_fields_size(file_list, &size_of_fields);
 	node = file_list;
 	total_blocks = get_total_blocks(file_list);
-	ft_printf("%lld total\n", total_blocks);
+	ft_printf("total %lld\n", total_blocks);
 	while (node)
 	{
 		file = (t_file*)node->content;

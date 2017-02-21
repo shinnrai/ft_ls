@@ -32,7 +32,7 @@ static t_options	determine_option(char option)
 	else
 	{
 		ft_error("ft_ls: illegal option -- ");
-		ft_error("");
+		write(STDERR_FILENO, &option, 1);
 		ft_error_exit("\nusage: ft_ls [-Ralrt] [file ...]\n");
 	}
 	return (0);

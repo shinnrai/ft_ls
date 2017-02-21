@@ -100,6 +100,8 @@ SRCSFL 		=	ft_memset.c \
 				ft_strswap.c \
 				ft_strndup.c \
 				ft_filenew.c \
+				ft_filecpy.c \
+				ft_filedel.c \
 				ft_lstdelfile.c \
 				ft_filelst_qsort.c \
 				ft_filelst_toarr.c \
@@ -115,6 +117,8 @@ SRCSFL 		=	ft_memset.c \
 				ft_file_getentries.c \
 				ft_lstif_file_isdir.c \
 				ft_lstcpyif.c \
+				ft_lstcpycontent_memcpy.c \
+				ft_lstcpycontent_file.c \
 				ft_textcolor.c \
 				ft_printf.c \
 				ft_printf_utils/format_a.c \

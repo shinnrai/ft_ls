@@ -145,11 +145,14 @@ void			ft_lstnotdelcontent(void *content, size_t content_size);
 void			ft_lstdelfile(void *file, size_t content_size);
 int				ft_lstlen(t_list *lst);
 void			ft_lstreverse(t_list **lst);
-t_list			*ft_lstcpy(t_list *list);
+t_list			*ft_lstcpy(t_list *list, void *(*copy_content)(void*, size_t));
 void			ft_lstdelif(t_list **list, int (*needs_to_del)(void *, size_t),
 				void (*del)(void *, size_t));
 int				ft_lstif_file_isdir(void *content, size_t content_size);
-t_list			*ft_lstcpyif(t_list *list, int (*needs_to_copy)(void*,size_t));
+t_list			*ft_lstcpyif(t_list *list, int (*needs_to_copy)(void*,size_t),
+					   void *(*copy_content)(void*, size_t));
+void			*ft_lstcpycontent_memcpy(void *content, size_t content_size);
+void			*ft_lstcpycontent_file(void *content, size_t content_size);
 /*
 **	Math
 */
@@ -188,6 +191,8 @@ void			ft_strqsort(char *strings[], int size);
 # include "t_file.h"
 
 t_file			*ft_filenew(char *name, char *path);
+void			ft_filedel(t_file *file_to_delete);
+t_file			*ft_filecpy(t_file *file);
 void			ft_filelst_qsort(t_list **lst,
 				int (*file_compare)(t_file*, t_file*));
 t_file			**ft_filelst_toarr(t_list *lst, int *size);

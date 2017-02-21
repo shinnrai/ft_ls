@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_filedel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/28 11:48:08 by ofedorov          #+#    #+#             */
-/*   Updated: 2016/09/28 11:54:09 by ofedorov         ###   ########.fr       */
+/*   Created: 2017/02/20 16:53:37 by ofedorov          #+#    #+#             */
+/*   Updated: 2017/02/20 16:53:39 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+void	ft_filedel(t_file *file_to_delete)
 {
-	t_list	*node_to_del;
-
-	if (!alst || !(*alst))
-		return ;
-	while (*alst)
-	{
-		node_to_del = *alst;
-		*alst = (*alst)->next;
-		ft_lstdelone(&node_to_del, del);
-	}
-	*alst = NULL;
+	FREE_IFN_NULL(file_to_delete->name);
+	FREE_IFN_NULL(file_to_delete->path);
+	FREE_IFN_NULL(file_to_delete->full_name);
+	FREE_IFN_NULL(file_to_delete->linking_to);
+	FREE_IFN_NULL(file_to_delete->user_name);
+	FREE_IFN_NULL(file_to_delete->group_name);
+	free(file_to_delete);
 }

@@ -28,13 +28,15 @@ void			display_entries(t_list *file_list, t_options options,
 	t_list	*node;
 	t_list	*directory_list;
 
-	directory_list = ft_lstcpyif(file_list, ft_lstif_file_isdir);
+	directory_list = ft_lstcpyif(file_list, ft_lstif_file_isdir,
+									ft_lstcpycontent_file);
 	node = directory_list;
 	while (node)
 	{
 		directory = (t_file*)node->content;
-		if (ft_strcmp(directory->name, ".") &&
-			ft_strcmp(directory->name, ".."))
+		if (IS_FROM_COMMAND_LINE(file_list) ||
+			(ft_strcmp(directory->name, ".") &&
+			ft_strcmp(directory->name, "..")))
 		{
 			(new_line) ? ft_printf("\n") : (0);
 			ft_printf("%s:\n", directory->full_name);
@@ -43,5 +45,5 @@ void			display_entries(t_list *file_list, t_options options,
 		new_line = true;
 		node = node->next;
 	}
-	//ft_lstdel(&directory_list, ft_lstdelfile);
+	ft_lstdel(&directory_list, ft_lstdelfile);
 }
