@@ -45,6 +45,7 @@ int	main(int argc, char **argv)
 	t_options	options;
 	t_file		*file;
 	t_list		*file_list;
+	int			error;
 
 	options = read_options(argc, argv);
 	file_list = read_files_from_arguments(argc, argv);
@@ -52,15 +53,24 @@ int	main(int argc, char **argv)
 	if (!file_list->next)
 	{
 		file = (t_file*)file_list->content;
-		ft_file_getinfo(file, "ft_ls: ");
-		if (FT_ISDIR(file->mode))
-			display_entries_one_dir(file, options);
-		else if (options & OPTION_LONG_FORMAT)
-			ft_filelst_printlongformat(file_list);
-		else
-			ft_filelst_print(file_list);
+		error = ft_file_getinfo(file, "ft_ls");
+		if (!error)
+		{
+			if (FT_ISDIR(file->mode))
+				display_entries_one_dir(file, options);
+			else if (options & OPTION_LONG_FORMAT)
+				ft_filelst_printlongformat(file_list);
+			else
+				ft_filelst_print(file_list);
+		}
 		ft_lstdel(&file_list, ft_lstdelfile);
 	}
 	else
+	{
+		error = check_all_files_are_accessible(file_list);
 		ft_ls(file_list, options);
+	}
+	if (error)
+		exit(EXIT_FAILURE);
+	exit(EXIT_SUCCESS);
 }

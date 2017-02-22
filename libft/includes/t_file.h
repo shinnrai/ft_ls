@@ -6,14 +6,13 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:19:57 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/21 14:51:39 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/21 21:59:07 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef T_FILE_H
 # define T_FILE_H
 
-# include "ft_ls_options.h"
 # include <sys/types.h>
 
 /*
@@ -36,6 +35,8 @@
 **  - file_size:                  size of the file in bytes
 **  - blocks:                     blocks allocated to the file
 **  - linking_to:                 name of the file that is linked by this file
+**  - major_device:               number of major device if the file if a link
+**  - minor_device:               number of minor device if the file if a link
 */
 
 # define FT_ISBLK(mode) ((mode & S_IFMT) == S_IFBLK)
@@ -54,6 +55,7 @@ typedef struct	s_file
 
 	time_t		time_of_modification;
 	long		time_of_modification_nsec;
+
 	mode_t		mode;
 	nlink_t		hard_links;
 
@@ -66,5 +68,8 @@ typedef struct	s_file
 	quad_t		blocks;
 
 	char		*linking_to;
+
+	int			major_device;
+	int 		minor_device;
 }				t_file;
 #endif

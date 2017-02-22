@@ -61,7 +61,7 @@ int			ft_vdprintf(int fd, const char *format, va_list ap)
 		if (*format == '%')
 		{
 			flags = read_format(fd, &format, ap);
-			chars_wr += switch_format(flags, ap, chars_wr);
+			chars_wr += switch_format(flags, ap);
 			if (flags->error)
 				write(2, flags->error, ft_strlen(flags->error));
 		}

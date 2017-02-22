@@ -70,7 +70,7 @@ t_flags					*new_flags(int fd, char format, bool just_count);
 t_flags					*read_format(int fd, const char **str, va_list ap);
 void					format_before(t_flags *flags);
 void					format_after(t_flags *flags);
-int						switch_format(t_flags *flags, va_list ap, int ch_wr);
+int						switch_format(t_flags *flags, va_list ap);
 long double				get_value_feag(t_flags *flags, va_list ap);
 unsigned long long int	get_value_oxu(t_flags *flags, va_list ap);
 int						supported_format(char c);

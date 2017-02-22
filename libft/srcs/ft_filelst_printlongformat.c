@@ -25,6 +25,8 @@ typedef struct	s_size_of_fields
 	uint8_t		user_name;
 	uint8_t		group_name;
 	uint8_t		file_size;
+	uint8_t		major_device;
+	uint8_t		minor_device;
 }				t_size_of_fields;
 
 static quad_t	get_total_blocks(t_list *file_list)
@@ -60,6 +62,10 @@ static void		determine_fields_size(t_list *file_list,
 			size_of_fields->user_name = ft_strlen(file->user_name);
 		if (ft_strlen(file->group_name) > size_of_fields->group_name)
 			size_of_fields->group_name = ft_strlen(file->group_name);
+		if (ft_nbrlen(file->minor_device) > size_of_fields->minor_device)
+			size_of_fields->minor_device = ft_nbrlen(file->minor_device);
+		if (ft_nbrlen(file->major_device) > size_of_fields->major_device)
+			size_of_fields->major_device = ft_nbrlen(file->major_device);
 		node = node->next;
 	}
 }
@@ -108,17 +114,27 @@ static void		print_filemode(mode_t mode)
 	ft_putchar((mode & S_IXOTH) ? 'x' : '-');
 }
 
-static void		print_one_longformat(t_file *file,
+static void		print_one_longformat(t_file *file, bool special_files,
 									t_size_of_fields *size_of_fields)
 {
 	char	*time_string;
 
 	print_filemode(file->mode);
-	ft_printf("  %*d %*s  %*s  %*llu",
-				size_of_fields->hard_links, file->hard_links,
+	ft_printf("  %*d ", size_of_fields->hard_links, file->hard_links);
+	ft_printf(special_files ? "%-*s  %-*s" : "%*s  %*s",
 				size_of_fields->user_name, file->user_name,
-				size_of_fields->group_name, file->group_name,
-				size_of_fields->file_size, file->file_size);
+				size_of_fields->group_name, file->group_name);
+	if (special_files)
+	{
+		if (FT_ISLNK(file->mode))
+			ft_printf("   %*s  ", size_of_fields->major_device, "");
+		else
+			ft_printf("   %*d, ",
+				size_of_fields->major_device, file->major_device);
+		ft_printf("%*d", size_of_fields->minor_device, file->minor_device);
+	}
+	else
+		ft_printf("  %*d", size_of_fields->file_size, file->file_size);
 	time_string = ctime(&file->time_of_modification);
 	ft_putnstr(&time_string[3], 8);
 	if (time(NULL) - file->time_of_modification < SIX_MONTH)
@@ -127,31 +143,28 @@ static void		print_one_longformat(t_file *file,
 		ft_putnstr(&time_string[19], 5);
 	ft_printf(" %s", file->name);
 	if (FT_ISLNK(file->mode))
-	{
-		ft_putstr(" -> ");
-		ft_putstr(file->linking_to);
-	}
+		ft_printf(" -> %s", file->linking_to);
 }
 
 void			ft_filelst_printlongformat(t_list *file_list)
 {
 	t_size_of_fields	size_of_fields;
-	t_list				*node;
 	t_file				*file;
 	quad_t				total_blocks;
+	bool				special_files;
 
 	if (!file_list)
 		return ;
-	size_of_fields = (t_size_of_fields){0, 0, 0, 0};
+	size_of_fields = (t_size_of_fields){0, 0, 0, 0, 0, 0};
 	determine_fields_size(file_list, &size_of_fields);
-	node = file_list;
 	total_blocks = get_total_blocks(file_list);
 	ft_printf("total %lld\n", total_blocks);
-	while (node)
+	special_files = ft_filelst_if_specialfiles(file_list);
+	while (file_list)
 	{
-		file = (t_file*)node->content;
-		print_one_longformat(file, &size_of_fields);
+		file = (t_file*)file_list->content;
+		print_one_longformat(file, special_files, &size_of_fields);
 		ft_putendl(NULL);
-		node = node->next;
+		file_list = file_list->next;
 	}
 }

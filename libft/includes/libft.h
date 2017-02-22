@@ -25,6 +25,7 @@
 # include <pwd.h>
 # include <limits.h>
 # include <uuid/uuid.h>
+# include <errno.h>
 # include <grp.h>
 # include <time.h>
 # include "get_next_line.h"
@@ -178,6 +179,7 @@ void			ft_textcolor(int attr, int fg, int bg);
 */
 void			ft_strswap(char **str1, char **str2);
 void			ft_strqsort(char *strings[], int size);
+bool			ft_strends(char *s1, char *s2);
 /*
 **  Files
 */
@@ -191,9 +193,10 @@ t_list			*ft_filearr_tolst(t_file **array, int size);
 int				ft_filecmpname(t_file *file1, t_file *file2);
 int				ft_filecmptime(t_file *file1, t_file *file2);
 int				ft_file_getinfo(t_file *file, char *add_to_error);
-void			ft_filelst_getinfo(t_list **file_list, char *add_to_error);
+int				ft_filelst_getinfo(t_list **file_list, char *add_to_error);
 void			ft_filelst_print(t_list *file_list);
 void			ft_filelst_printlongformat(t_list *file_list);
 t_list			*ft_file_getentries(t_file *directory, char *add_to_error);
+bool			ft_filelst_if_specialfiles(t_list *file_list);
 
 #endif

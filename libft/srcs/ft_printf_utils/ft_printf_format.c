@@ -18,7 +18,7 @@ int		supported_format(char c)
 {
 	if (c == 'c' || c == 's' || c == 'd' || c == 'i' || c == 'o' ||
 		c == 'x' || c == 'u' || c == 'f' || c == 'e' || c == 'a' ||
-		c == 'g' || c == 'n' || c == 'p')
+		c == 'g' || c == 'p')
 		return (1);
 	return (0);
 }
@@ -43,6 +43,7 @@ t_flags	*new_flags(int fd, char format, bool just_count)
 	flags->sign = false;
 	flags->positive = true;
 	flags->space = false;
+	flags->zero = false;
 	return (flags);
 }
 
@@ -84,23 +85,9 @@ void	format_after(t_flags *flags)
 			ft_printf_write(" ", 1, flags);
 }
 
-int		switch_format(t_flags *flags, va_list ap, int ch_wr)
+int		switch_format(t_flags *flags, va_list ap)
 {
-	int	wr;
-
-	wr = 1;
 	if (supported_format(flags->format))
 		return (g_formats[(int)flags->format](flags, ap));
-	if (flags->format == 'n')
-	{
-		ft_putnbr_fd(ch_wr, flags->fd);
-		while (ch_wr >= 10)
-		{
-			ch_wr /= 10;
-			wr++;
-		}
-		return (wr);
-	}
-	else
-		return (g_formats[(int)'?'](flags, ap));
+	return (g_formats[(int)'?'](flags, ap));
 }

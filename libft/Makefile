@@ -6,7 +6,7 @@
 #    By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/09/23 12:56:49 by ofedorov          #+#    #+#              #
-#    Updated: 2017/02/21 10:43:38 by ofedorov         ###   ########.fr        #
+#    Updated: 2017/02/21 23:26:47 by ofedorov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCSFL 		=	ft_memset.c \
 				ft_strjoin.c \
 				ft_strtrim.c \
 				ft_strsplit.c \
+				ft_strends.c \
 				ft_itoa.c \
 				ft_nbrlen.c \
 				ft_putchar.c \
@@ -119,6 +120,7 @@ SRCSFL 		=	ft_memset.c \
 				ft_lstcpyif.c \
 				ft_lstcpycontent_memcpy.c \
 				ft_lstcpycontent_file.c \
+				ft_filelst_if_specialfiles.c \
 				ft_textcolor.c \
 				ft_printf.c \
 				ft_printf_utils/format_a.c \

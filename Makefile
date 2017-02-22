@@ -23,7 +23,8 @@ SRCSFL		=	main.c \
 				is_dot_file.c \
 				isnot_dir_from_command_line.c \
 				read_files_from_arguments.c \
-				read_options.c
+				read_options.c \
+				check_all_files_are_accessible.c
 
 SRCSFD		=	srcs
 OBJSFD		=	objs

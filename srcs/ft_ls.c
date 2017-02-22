@@ -24,7 +24,7 @@ void			ft_ls(t_list *file_list, t_options options)
 	if (!file_list)
 		return ;
 	ft_filelst_qsort(&file_list, ft_filecmpname);
-	ft_filelst_getinfo(&file_list, "ft_ls: ");
+	ft_filelst_getinfo(&file_list, "ft_ls");
 	if (!(options & OPTION_INCLUDE_DOT_FILES) &&
 		!IS_FROM_COMMAND_LINE(file_list))
 		ft_lstdelif(&file_list, is_dot_file, ft_lstdelfile);

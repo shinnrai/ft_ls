@@ -100,9 +100,6 @@ void	check_specific_f(t_flags *flags)
 	(flags->format == 'o' || flags->format == 'x' || flags->format == 'u') ?
 						assign_false(2, &flags->sign, &flags->space) : 0;
 	(flags->format == 'u') ? assign_false(1, &flags->alternative) : 0;
-	(flags->format == 'n') ? assign_false(5, &flags->alternative, &flags->sign,
-					&flags->space, &flags->zero, &flags->left_justified) : 0;
-	(flags->format == 'n') ? flags->field_width = -1 : 0;
 	if (flags->format == 'p' && flags->zero && flags->precision == -1)
 		flags->precision = (flags->field_width >= 2) ? flags->field_width - 2 :
 							flags->precision;

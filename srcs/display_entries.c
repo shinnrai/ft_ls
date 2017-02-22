@@ -16,7 +16,7 @@ void			display_entries_one_dir(t_file *directory, t_options options)
 {
 	t_list	*entries;
 
-	entries = ft_file_getentries(directory, "ft_ls: ");
+	entries = ft_file_getentries(directory, "ft_ls");
 	if (entries)
 		ft_ls(entries, options);
 }

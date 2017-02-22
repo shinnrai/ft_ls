@@ -51,7 +51,8 @@ t_options			read_options(int argc, char **argv)
 
 	index_param = 1;
 	result_options = 0;
-	while (index_param < argc && argv[index_param][0] == '-')
+	while (index_param < argc && argv[index_param][0] == '-' &&
+								argv[index_param][1])
 	{
 		index_char = 1;
 		while (argv[index_param][index_char])

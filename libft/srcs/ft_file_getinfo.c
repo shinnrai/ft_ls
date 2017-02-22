@@ -18,6 +18,11 @@ static void	set_link_name(t_file *file, struct stat *file_stat)
 	char		*link_name;
 	ssize_t		chars_written;
 
+	if (!(FT_ISLNK(file->mode)))
+	{
+		file->linking_to = NULL;
+		return ;
+	}
 	if (file_stat->st_size == 0)
 		link_name_size = PATH_MAX;
 	else
@@ -29,7 +34,7 @@ static void	set_link_name(t_file *file, struct stat *file_stat)
 	free(link_name);
 }
 
-static void	copy_stat(t_file *file, struct stat *file_stat)
+static void	set_info(t_file *file, struct stat *file_stat)
 {
 	struct passwd	*user_info;
 	struct group	*group_info;
@@ -52,26 +57,24 @@ static void	copy_stat(t_file *file, struct stat *file_stat)
 	file->time_of_modification = file_stat->st_mtimespec.tv_sec;
 	file->time_of_modification_nsec = file_stat->st_mtimespec.tv_nsec;
 	file->mode = file_stat->st_mode;
-	if (FT_ISLNK(file->mode))
-		set_link_name(file, file_stat);
-	else
-		file->linking_to = NULL;
+	file->major_device = (int)file_stat->st_rdev >> 24;
+	file->minor_device = (int)file_stat->st_rdev & 0xFFFFFF;
+	set_link_name(file, file_stat);
 }
 
 int			ft_file_getinfo(t_file *file, char *add_to_error)
 {
 	struct stat	file_stat;
 	int			return_from_stat;
-	char		*info_for_error;
 
 	return_from_stat = lstat(file->full_name, &file_stat);
 	if (return_from_stat == -1)
 	{
-		info_for_error = ft_strjoin(add_to_error, file->name);
-		perror(info_for_error);
-		FREE_IFN_NULL(info_for_error);
+		if (add_to_error)
+			ft_dprintf(STDERR_FILENO, "%s: ", add_to_error);
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", file->name, strerror(errno));
 		return (-1);
 	}
-	copy_stat(file, &file_stat);
+	set_info(file, &file_stat);
 	return (0);
 }

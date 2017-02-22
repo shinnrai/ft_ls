@@ -25,7 +25,7 @@ t_list	*read_files_from_arguments(int argc, char **argv)
 
 	received_files = NULL;
 	index = 1;
-	while (index < argc && argv[index][0] == '-')
+	while (index < argc && argv[index][0] == '-' && argv[index][1])
 		index++;
 	if (argc == index)
 	{

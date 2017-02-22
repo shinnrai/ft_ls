@@ -21,5 +21,6 @@ int			isnot_dir_from_command_line(void *content, size_t content_size);
 void		display_entries(t_list *file_list, t_options options,
 			bool new_line);
 void		display_entries_one_dir(t_file *directory, t_options options);
+int			check_all_files_are_accessible(t_list *file_list);
 
 #endif

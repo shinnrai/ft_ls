@@ -25,16 +25,15 @@ static void	add_to_filelst(char *name, char *path, t_list **file_list)
 t_list		*ft_file_getentries(t_file *directory, char *add_to_error)
 {
 	t_list			*files_in_directory;
-	char			*info_for_error;
 	DIR				*directory_stream;
 	struct dirent	*new_entry;
 
 	directory_stream = opendir(directory->full_name);
 	if (!directory_stream)
 	{
-		info_for_error = ft_strjoin(add_to_error, directory->name);
-		perror(ft_strjoin(add_to_error, directory->name));
-		FREE_IFN_NULL(info_for_error);
+		if (add_to_error)
+			ft_dprintf(STDERR_FILENO, "%s: ", add_to_error);
+		ft_dprintf(STDERR_FILENO, "%s: %s\n", directory->name, strerror(errno));
 		return (NULL);
 	}
 	files_in_directory = NULL;
