@@ -121,17 +121,16 @@ static void		print_one_longformat(t_file *file, bool special_files,
 
 	print_filemode(file->mode);
 	ft_printf("  %*d ", size_of_fields->hard_links, file->hard_links);
-	ft_printf(special_files ? "%-*s  %-*s" : "%*s  %*s",
+	ft_printf(special_files ? "%-*s  %-*s   " : "%*s  %*s   ",
 				size_of_fields->user_name, file->user_name,
 				size_of_fields->group_name, file->group_name);
 	if (special_files)
 	{
 		if (FT_ISLNK(file->mode))
-			ft_printf("   %*s  ", size_of_fields->major_device, "");
+			ft_printf("%*s ", size_of_fields->major_device, "");
 		else
-			ft_printf("   %*d, ",
-				size_of_fields->major_device, file->major_device);
-		ft_printf("%*d", size_of_fields->minor_device, file->minor_device);
+			ft_printf("%*d,", size_of_fields->major_device, file->major_device);
+		ft_printf(" %*d", size_of_fields->minor_device, file->minor_device);
 	}
 	else
 		ft_printf("  %*d", size_of_fields->file_size, file->file_size);
@@ -142,8 +141,7 @@ static void		print_one_longformat(t_file *file, bool special_files,
 	else
 		ft_putnstr(&time_string[19], 5);
 	ft_printf(" %s", file->name);
-	if (FT_ISLNK(file->mode))
-		ft_printf(" -> %s", file->linking_to);
+	FT_ISLNK(file->mode) ? ft_printf(" -> %s", file->linking_to) : (0);
 }
 
 void			ft_filelst_printlongformat(t_list *file_list)

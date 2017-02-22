@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:19:57 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/21 21:59:07 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/22 01:59:18 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ typedef struct	s_file
 	char		*linking_to;
 
 	int			major_device;
-	int 		minor_device;
+	int			minor_device;
 }				t_file;
 #endif
