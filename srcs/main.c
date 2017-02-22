@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 14:01:50 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/03 14:01:52 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/22 02:49:01 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ int	main(int argc, char **argv)
 	options = read_options(argc, argv);
 	file_list = read_files_from_arguments(argc, argv);
 	error = check_all_files_are_accessible(file_list);
-	(error) ? exit(EXIT_FAILURE) : (0);
 	ft_filelst_qsort(&file_list, ft_filecmpname);
-	if (!file_list->next)
+	if (!error && !file_list->next)
 	{
 		file = (t_file*)file_list->content;
 		ft_file_getinfo(file, "ft_ls");
@@ -66,5 +65,6 @@ int	main(int argc, char **argv)
 	}
 	else
 		ft_ls(file_list, options);
+	(error) ? exit(EXIT_FAILURE) : (0);
 	exit(EXIT_SUCCESS);
 }

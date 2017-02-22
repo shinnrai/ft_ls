@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 22:10:00 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/21 15:08:35 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/22 02:52:42 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,23 +70,6 @@ static void		determine_fields_size(t_list *file_list,
 	}
 }
 
-/*
-**  long format: -rw-r--r--  1 ofedorov  august  1340 Feb  3 11:47 ft_strnstr.c
-**  time_string: Thu Nov 24 18:22:48 1986\n\0
-**  Fields of long format:
-**  <10 chars filemode>2 spaces including @ if specified
-**  <nlinks>1 space
-**  <user name>2 spaces
-**  <group name>2 spaces
-**  <size>1 space
-**  <3 letter of month>1 space
-**  <2 chars of date>1 space
-**  <5 chars of time or 1 space+year>1 space
-**  <name of file>
-**  if link " -> "<name of file linked to>
-**  total: 31 + nlinks + user name + group name + size + file name + link name
-*/
-
 static void		print_filemode(mode_t mode)
 {
 	if (FT_ISBLK(mode))
@@ -111,7 +94,9 @@ static void		print_filemode(mode_t mode)
 	ft_putchar((mode & S_IXGRP) ? 'x' : '-');
 	ft_putchar((mode & S_IROTH) ? 'r' : '-');
 	ft_putchar((mode & S_IWOTH) ? 'w' : '-');
-	ft_putchar((mode & S_IXOTH) ? 'x' : '-');
+	(mode & S_ISVTX) ? ft_putchar('t') : (0);
+	if (!(mode & S_ISVTX))
+		ft_putchar((mode & S_IXOTH) ? 'x' : '-');
 }
 
 static void		print_one_longformat(t_file *file, bool special_files,
@@ -121,7 +106,7 @@ static void		print_one_longformat(t_file *file, bool special_files,
 
 	print_filemode(file->mode);
 	ft_printf("  %*d ", size_of_fields->hard_links, file->hard_links);
-	ft_printf(special_files ? "%-*s  %-*s   " : "%*s  %*s   ",
+	ft_printf(special_files ? "%-*s  %-*s   " : "%*s  %*s  ",
 				size_of_fields->user_name, file->user_name,
 				size_of_fields->group_name, file->group_name);
 	if (special_files)
@@ -133,7 +118,7 @@ static void		print_one_longformat(t_file *file, bool special_files,
 		ft_printf(" %*d", size_of_fields->minor_device, file->minor_device);
 	}
 	else
-		ft_printf("  %*d", size_of_fields->file_size, file->file_size);
+		ft_printf("%*d", size_of_fields->file_size, file->file_size);
 	time_string = ctime(&file->time_of_modification);
 	ft_putnstr(&time_string[3], 8);
 	if (time(NULL) - file->time_of_modification < SIX_MONTH)
@@ -156,7 +141,8 @@ void			ft_filelst_printlongformat(t_list *file_list)
 	size_of_fields = (t_size_of_fields){0, 0, 0, 0, 0, 0};
 	determine_fields_size(file_list, &size_of_fields);
 	total_blocks = get_total_blocks(file_list);
-	ft_printf("total %lld\n", total_blocks);
+	if (!(IS_FROM_COMMAND_LINE(file_list)))
+		ft_printf("total %lld\n", total_blocks);
 	special_files = ft_filelst_if_specialfiles(file_list);
 	while (file_list)
 	{

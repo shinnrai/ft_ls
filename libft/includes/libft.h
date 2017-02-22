@@ -6,7 +6,7 @@
 /*   By: ofedorov <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/21 12:03:12 by ofedorov          #+#    #+#             */
-/*   Updated: 2017/02/21 15:07:34 by ofedorov         ###   ########.fr       */
+/*   Updated: 2017/02/22 02:32:58 by ofedorov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@
 # define NOCOLOR	RESET, WHITE, BLACK
 
 # define FREE_IFN_NULL(to_free) (to_free) ? free(to_free) : (0);
+
+# define IS_FROM_COMMAND_LINE(fl) (fl && ((t_file*)fl->content)->path ? 0 : 1)
 
 /*
 **	Part I
